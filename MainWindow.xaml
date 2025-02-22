@@ -1,0 +1,298 @@
+﻿<Window x:Class="TaskScheduler.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Task Scheduler" Height="850" Width="1200" Background="#f0f2f5">
+    
+    <!-- Root-level TabControl -->
+    <TabControl x:Name="MainTabControl">
+
+        <!-- MAIN TAB: Four Sections -->
+        <TabItem Header="Main">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- SECTION 1: Most Important &amp; Urgent -->
+                    <Border Grid.Row="0" Grid.Column="0"
+                            Background="#EF5350" CornerRadius="10" Padding="15" Margin="10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- Top: Title and Input -->
+                            <StackPanel Grid.Row="0">
+                                <TextBlock Text="Most Important &amp; Urgent"
+                                           FontSize="18" FontWeight="Bold" Foreground="White" />
+                                <Grid Margin="0,10,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox x:Name="MostImportantUrgentInput"
+                                             AcceptsReturn="True" TextWrapping="Wrap"
+                                             VerticalScrollBarVisibility="Auto"
+                                             HorizontalScrollBarVisibility="Disabled"
+                                             Background="White" BorderThickness="0"
+                                             FontSize="14" Padding="10" Foreground="Gray"
+                                             Text="Type your task here..."
+                                             GotFocus="RemovePlaceholder"
+                                             LostFocus="RestorePlaceholder"
+                                             Margin="0,0,10,0"/>
+                                    <Button Grid.Column="1" Content="Establish"
+                                            Tag="MostImportantUrgent"
+                                            Click="AddTask_Click"
+                                            Background="#ffffff" Foreground="#EF5350"
+                                            FontWeight="Bold" Width="100" Height="40"
+                                            BorderThickness="0" HorizontalAlignment="Right"
+                                            VerticalAlignment="Center"/>
+                                </Grid>
+                            </StackPanel>
+
+                            <!-- Bottom: Task List -->
+                            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto"
+                                          HorizontalScrollBarVisibility="Disabled" Background="Transparent">
+                                <StackPanel x:Name="MostImportantUrgentStack" Orientation="Vertical" Background="Transparent"/>
+                            </ScrollViewer>
+                        </Grid>
+                    </Border>
+
+                    <!-- SECTION 2: Important but Not Urgent -->
+                    <Border Grid.Row="0" Grid.Column="1"
+                            Background="#64B5F6" CornerRadius="10" Padding="15" Margin="10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0">
+                                <TextBlock Text="Important but Not Urgent"
+                                           FontSize="18" FontWeight="Bold" Foreground="White" />
+                                <Grid Margin="0,10,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox x:Name="ImportantNotUrgentInput"
+                                             AcceptsReturn="True" TextWrapping="Wrap"
+                                             VerticalScrollBarVisibility="Auto"
+                                             HorizontalScrollBarVisibility="Disabled"
+                                             Background="White" BorderThickness="0"
+                                             FontSize="14" Padding="10" Foreground="Gray"
+                                             Text="Type your task here..."
+                                             GotFocus="RemovePlaceholder"
+                                             LostFocus="RestorePlaceholder"
+                                             Margin="0,0,10,0"/>
+                                    <Button Grid.Column="1" Content="Establish"
+                                            Tag="ImportantNotUrgent"
+                                            Click="AddTask_Click"
+                                            Background="#ffffff" Foreground="#64B5F6"
+                                            FontWeight="Bold" Width="100" Height="40"
+                                            BorderThickness="0" HorizontalAlignment="Right"
+                                            VerticalAlignment="Center"/>
+                                </Grid>
+                            </StackPanel>
+                            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto"
+                                          HorizontalScrollBarVisibility="Disabled" Background="Transparent">
+                                <StackPanel x:Name="ImportantNotUrgentStack" Orientation="Vertical" Background="Transparent"/>
+                            </ScrollViewer>
+                        </Grid>
+                    </Border>
+
+                    <!-- SECTION 3: Urgent but Not Important -->
+                    <Border Grid.Row="1" Grid.Column="0"
+                            Background="#FFB74D" CornerRadius="10" Padding="15" Margin="10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0">
+                                <TextBlock Text="Urgent but Not Important"
+                                           FontSize="18" FontWeight="Bold" Foreground="White" />
+                                <Grid Margin="0,10,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox x:Name="UrgentNotImportantInput"
+                                             AcceptsReturn="True" TextWrapping="Wrap"
+                                             VerticalScrollBarVisibility="Auto"
+                                             HorizontalScrollBarVisibility="Disabled"
+                                             Background="White" BorderThickness="0"
+                                             FontSize="14" Padding="10" Foreground="Gray"
+                                             Text="Type your task here..."
+                                             GotFocus="RemovePlaceholder"
+                                             LostFocus="RestorePlaceholder"
+                                             Margin="0,0,10,0"/>
+                                    <Button Grid.Column="1" Content="Establish"
+                                            Tag="UrgentNotImportant"
+                                            Click="AddTask_Click"
+                                            Background="#ffffff" Foreground="#FFB74D"
+                                            FontWeight="Bold" Width="100" Height="40"
+                                            BorderThickness="0" HorizontalAlignment="Right"
+                                            VerticalAlignment="Center"/>
+                                </Grid>
+                            </StackPanel>
+                            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto"
+                                          HorizontalScrollBarVisibility="Disabled" Background="Transparent">
+                                <StackPanel x:Name="UrgentNotImportantStack" Orientation="Vertical" Background="Transparent"/>
+                            </ScrollViewer>
+                        </Grid>
+                    </Border>
+
+                    <!-- SECTION 4: Not Important &amp; Not Urgent -->
+                    <Border Grid.Row="1" Grid.Column="1"
+                            Background="#90A4AE" CornerRadius="10" Padding="15" Margin="10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0">
+                                <TextBlock Text="Not Important &amp; Not Urgent"
+                                           FontSize="18" FontWeight="Bold" Foreground="White" />
+                                <Grid Margin="0,10,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox x:Name="NotImportantNotUrgentInput"
+                                             AcceptsReturn="True" TextWrapping="Wrap"
+                                             VerticalScrollBarVisibility="Auto"
+                                             HorizontalScrollBarVisibility="Disabled"
+                                             Background="White" BorderThickness="0"
+                                             FontSize="14" Padding="10" Foreground="Gray"
+                                             Text="Type your task here..."
+                                             GotFocus="RemovePlaceholder"
+                                             LostFocus="RestorePlaceholder"
+                                             Margin="0,0,10,0"/>
+                                    <Button Grid.Column="1" Content="Establish"
+                                            Tag="NotImportantNotUrgent"
+                                            Click="AddTask_Click"
+                                            Background="#ffffff" Foreground="#90A4AE"
+                                            FontWeight="Bold" Width="100" Height="40"
+                                            BorderThickness="0" HorizontalAlignment="Right"
+                                            VerticalAlignment="Center"/>
+                                </Grid>
+                            </StackPanel>
+                            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto"
+                                          HorizontalScrollBarVisibility="Disabled" Background="Transparent">
+                                <StackPanel x:Name="NotImportantNotUrgentStack" Orientation="Vertical" Background="Transparent"/>
+                            </ScrollViewer>
+                        </Grid>
+                    </Border>
+
+                </Grid>
+            </ScrollViewer>
+        </TabItem>
+
+        <!-- WEEKLY SCHEDULE TAB -->
+        <TabItem Header="Weekly Schedule">
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Back Button (use a Unicode arrow entity) -->
+                <Button Content="&#x2190; Back"
+                        Click="BackButton_Click"
+                        Margin="5"
+                        Grid.Column="0"
+                        Grid.Row="0"/>
+
+                <!-- Task Pool: Unscheduled Tasks -->
+                <GroupBox Header="Unscheduled Tasks" Grid.Column="0" Grid.Row="1" Margin="5">
+                    <!-- Removed PreviewMouseMove="TaskPoolItem_MouseMove" 
+                         since we don't define that method in code -->
+                    <ListBox x:Name="TaskPoolList"
+                             AllowDrop="True"
+                             Drop="TaskPool_Drop"
+                             PreviewMouseLeftButtonDown="TaskCard_PreviewMouseLeftButtonDown"/>
+                </GroupBox>
+
+                <!-- Day Panels: Monday to Sunday arranged in a UniformGrid -->
+                <UniformGrid Grid.Column="1" Grid.Row="1" Columns="7" Margin="10">
+
+                    <!-- Monday -->
+                    <Border x:Name="MondayPanel" Background="White" CornerRadius="10" Padding="5" Margin="5"
+                            AllowDrop="True" Drop="DayPanel_Drop" Tag="Monday">
+                        <StackPanel>
+                            <TextBlock Text="Monday" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,5"/>
+                            <StackPanel x:Name="MondayTasks" Orientation="Vertical"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Tuesday -->
+                    <Border x:Name="TuesdayPanel" Background="White" CornerRadius="10" Padding="5" Margin="5"
+                            AllowDrop="True" Drop="DayPanel_Drop" Tag="Tuesday">
+                        <StackPanel>
+                            <TextBlock Text="Tuesday" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,5"/>
+                            <StackPanel x:Name="TuesdayTasks" Orientation="Vertical"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Wednesday -->
+                    <Border x:Name="WednesdayPanel" Background="White" CornerRadius="10" Padding="5" Margin="5"
+                            AllowDrop="True" Drop="DayPanel_Drop" Tag="Wednesday">
+                        <StackPanel>
+                            <TextBlock Text="Wednesday" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,5"/>
+                            <StackPanel x:Name="WednesdayTasks" Orientation="Vertical"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Thursday -->
+                    <Border x:Name="ThursdayPanel" Background="White" CornerRadius="10" Padding="5" Margin="5"
+                            AllowDrop="True" Drop="DayPanel_Drop" Tag="Thursday">
+                        <StackPanel>
+                            <TextBlock Text="Thursday" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,5"/>
+                            <StackPanel x:Name="ThursdayTasks" Orientation="Vertical"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Friday -->
+                    <Border x:Name="FridayPanel" Background="White" CornerRadius="10" Padding="5" Margin="5"
+                            AllowDrop="True" Drop="DayPanel_Drop" Tag="Friday">
+                        <StackPanel>
+                            <TextBlock Text="Friday" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,5"/>
+                            <StackPanel x:Name="FridayTasks" Orientation="Vertical"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Saturday -->
+                    <Border x:Name="SaturdayPanel" Background="White" CornerRadius="10" Padding="5" Margin="5"
+                            AllowDrop="True" Drop="DayPanel_Drop" Tag="Saturday">
+                        <StackPanel>
+                            <TextBlock Text="Saturday" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,5"/>
+                            <StackPanel x:Name="SaturdayTasks" Orientation="Vertical"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Sunday -->
+                    <Border x:Name="SundayPanel" Background="White" CornerRadius="10" Padding="5" Margin="5"
+                            AllowDrop="True" Drop="DayPanel_Drop" Tag="Sunday">
+                        <StackPanel>
+                            <TextBlock Text="Sunday" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,5"/>
+                            <StackPanel x:Name="SundayTasks" Orientation="Vertical"/>
+                        </StackPanel>
+                    </Border>
+
+                </UniformGrid>
+            </Grid>
+        </TabItem>
+
+    </TabControl>
+</Window>
